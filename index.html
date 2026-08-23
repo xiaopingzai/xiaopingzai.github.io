@@ -4,18 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>xiaopingzai · 项目集</title>
-  <!-- 字体选择：Inter 用于正文，Playfair Display 用于标题 -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet" />
   <style>
-    /* ---------- 全局重置 ---------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    /* ---------- 重置 & 全局 ---------- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       background: #121210;
       color: #e5e2db;
@@ -27,8 +21,6 @@
       flex-direction: column;
       align-items: center;
     }
-
-    /* ---------- 主容器 ---------- */
     .container {
       max-width: 1300px;
       width: 100%;
@@ -44,7 +36,6 @@
       padding-bottom: 1.2rem;
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
-
     .header-left h1 {
       font-family: 'Playfair Display', serif;
       font-weight: 500;
@@ -61,7 +52,6 @@
       margin-top: 0.25rem;
       text-transform: uppercase;
     }
-
     .header-right {
       text-align: right;
       font-size: 0.95rem;
@@ -82,7 +72,7 @@
       margin: 2rem 0 3rem;
     }
 
-    /* ---------- 项目卡片 ---------- */
+    /* ---------- 卡片 ---------- */
     .project-card {
       background: #1e1c18;
       border-radius: 24px;
@@ -90,14 +80,16 @@
       transition: transform 0.3s ease, box-shadow 0.4s ease;
       box-shadow: 0 8px 30px -10px rgba(0, 0, 0, 0.6);
       border: 1px solid rgba(255, 255, 255, 0.04);
-      cursor: default;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
     }
     .project-card:hover {
       transform: translateY(-8px);
       box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.8);
       border-color: rgba(255, 255, 255, 0.08);
     }
-
     .project-thumb {
       width: 100%;
       aspect-ratio: 16 / 10;
@@ -110,7 +102,6 @@
       position: relative;
       overflow: hidden;
     }
-    /* 模拟缩略图渐变装饰 */
     .project-thumb::after {
       content: '';
       position: absolute;
@@ -118,7 +109,6 @@
       background: linear-gradient(135deg, rgba(255,255,255,0.02), transparent 60%);
       pointer-events: none;
     }
-
     .project-info {
       padding: 1.6rem 1.8rem 2rem;
     }
@@ -162,15 +152,6 @@
       color: #6b6258;
       letter-spacing: 0.3px;
     }
-    .footer a {
-      color: #bfb6a8;
-      text-decoration: none;
-      border-bottom: 1px dotted #3a3530;
-    }
-    .footer a:hover {
-      color: #f0ede8;
-      border-bottom-color: #bfb6a8;
-    }
 
     /* ---------- 响应式 ---------- */
     @media (max-width: 700px) {
@@ -186,111 +167,119 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- 头部 -->
-    <header class="header">
-      <div class="header-left">
-        <h1>xiaopingzai</h1>
-        <div class="subhead">独立创作 · 交互与视觉</div>
-      </div>
-      <div class="header-right">
-        <span class="count">6</span> 个项目
-        <span style="display:block; font-size:0.8rem; opacity:0.6;">2025 作品集</span>
-      </div>
-    </header>
-
-    <!-- 项目网格（由 JavaScript 动态生成） -->
-    <div class="project-grid" id="projectGrid"></div>
-
-    <!-- 底部 -->
-    <div class="footer">
-      <span>设计 · 代码 · 2025</span>
+<div class="container">
+  <header class="header">
+    <div class="header-left">
+      <h1>xiaopingzai</h1>
+      <div class="subhead">独立创作 · 交互与视觉</div>
     </div>
+    <div class="header-right">
+      <span class="count">7</span> 个项目
+      <span style="display:block; font-size:0.8rem; opacity:0.6;">2025 作品集</span>
+    </div>
+  </header>
+
+  <div class="project-grid" id="projectGrid"></div>
+
+  <div class="footer">
+    <span>设计 · 代码 · 2025</span>
   </div>
+</div>
 
-  <script>
-    // ---------- 项目数据 ----------
-    const projects = [
-      {
-        name: '《隐秩序》',
-        desc: '基于声景的生成式视觉装置，使用 p5.js 与实时音频分析。',
-        tags: ['Creative Coding', 'p5.js', 'Sound'],
-        emoji: '〰️'
-      },
-      {
-        name: '「慢递」概念网站',
-        desc: '为虚拟邮局设计的叙事型页面，强调时间感知与留白。',
-        tags: ['Web Design', 'GSAP', 'Typography'],
-        emoji: '✉️'
-      },
-      {
-        name: '机器人草稿本',
-        desc: '开源绘图工具，允许用户用自然语言指令生成几何图形。',
-        tags: ['Tool', 'React', 'OpenAI'],
-        emoji: '🤖'
-      },
-      {
-        name: '城市切片',
-        desc: '以数据驱动的信息雕塑，将城市交通流映射为三维形态。',
-        tags: ['Data Art', 'Three.js', 'Blender'],
-        emoji: '🏙️'
-      },
-      {
-        name: '字重游戏',
-        desc: '通过可变字体探索情感表达，用户拖动滑块改变字体粗细与语气。',
-        tags: ['Variable Fonts', 'Interactive', 'CSS'],
-        emoji: '🔠'
-      },
-      {
-        name: '夜航船',
-        desc: '个人实验性播客的视觉身份，包含动态封面与定制播放器。',
-        tags: ['Branding', 'Motion', 'Web Audio'],
-        emoji: '⛵'
-      }
-    ];
+<script>
+  // ---------- 项目数据（新增 NBT 编辑器） ----------
+  const projects = [
+    {
+      name: '《隐秩序》',
+      desc: '基于声景的生成式视觉装置，使用 p5.js 与实时音频分析。',
+      tags: ['Creative Coding', 'p5.js', 'Sound'],
+      emoji: '〰️',
+      link: '#'
+    },
+    {
+      name: '「慢递」概念网站',
+      desc: '为虚拟邮局设计的叙事型页面，强调时间感知与留白。',
+      tags: ['Web Design', 'GSAP', 'Typography'],
+      emoji: '✉️',
+      link: '#'
+    },
+    {
+      name: '机器人草稿本',
+      desc: '开源绘图工具，允许用户用自然语言指令生成几何图形。',
+      tags: ['Tool', 'React', 'OpenAI'],
+      emoji: '🤖',
+      link: '#'
+    },
+    {
+      name: '城市切片',
+      desc: '以数据驱动的信息雕塑，将城市交通流映射为三维形态。',
+      tags: ['Data Art', 'Three.js', 'Blender'],
+      emoji: '🏙️',
+      link: '#'
+    },
+    {
+      name: '字重游戏',
+      desc: '通过可变字体探索情感表达，用户拖动滑块改变字体粗细与语气。',
+      tags: ['Variable Fonts', 'Interactive', 'CSS'],
+      emoji: '🔠',
+      link: '#'
+    },
+    {
+      name: '夜航船',
+      desc: '个人实验性播客的视觉身份，包含动态封面与定制播放器。',
+      tags: ['Branding', 'Motion', 'Web Audio'],
+      emoji: '⛵',
+      link: '#'
+    },
+    // ⭐ 新增项目：NBT 编辑器，点击跳转到 /mcnbtbjq/index.html
+    {
+      name: 'NBT 编辑器',
+      desc: 'Minecraft 世界数据编辑器，支持数字 ID、树形懒加载、MCA 区块地图。',
+      tags: ['Minecraft', 'NBT', 'Tool'],
+      emoji: '🗺️',
+      link: '/mcnbtbjq/index.html'  // 跳转路径
+    }
+  ];
 
-    // ---------- 渲染网格 ----------
-    const grid = document.getElementById('projectGrid');
+  // ---------- 渲染网格 ----------
+  const grid = document.getElementById('projectGrid');
+  projects.forEach(p => {
+    const card = document.createElement('a');
+    card.className = 'project-card';
+    card.href = p.link || '#';
 
-    projects.forEach(p => {
-      const card = document.createElement('div');
-      card.className = 'project-card';
+    const thumb = document.createElement('div');
+    thumb.className = 'project-thumb';
+    const hue = Math.floor(Math.random() * 30 + 30);
+    thumb.style.background = `hsl(${hue}, 15%, 18%)`;
+    thumb.textContent = p.emoji;
 
-      // 缩略图（用 emoji 和简单背景模拟）
-      const thumb = document.createElement('div');
-      thumb.className = 'project-thumb';
-      // 用随机温和的底色，提升视觉丰富度
-      const hue = Math.floor(Math.random() * 30 + 30); // 暖色范围
-      thumb.style.background = `hsl(${hue}, 15%, 18%)`;
-      thumb.textContent = p.emoji;
+    const info = document.createElement('div');
+    info.className = 'project-info';
 
-      // 信息区
-      const info = document.createElement('div');
-      info.className = 'project-info';
+    const title = document.createElement('h3');
+    title.textContent = p.name;
 
-      const title = document.createElement('h3');
-      title.textContent = p.name;
+    const desc = document.createElement('div');
+    desc.className = 'desc';
+    desc.textContent = p.desc;
 
-      const desc = document.createElement('div');
-      desc.className = 'desc';
-      desc.textContent = p.desc;
-
-      const tagsWrap = document.createElement('div');
-      tagsWrap.className = 'project-tags';
-      p.tags.forEach(tag => {
-        const span = document.createElement('span');
-        span.textContent = tag;
-        tagsWrap.appendChild(span);
-      });
-
-      info.appendChild(title);
-      info.appendChild(desc);
-      info.appendChild(tagsWrap);
-
-      card.appendChild(thumb);
-      card.appendChild(info);
-      grid.appendChild(card);
+    const tagsWrap = document.createElement('div');
+    tagsWrap.className = 'project-tags';
+    p.tags.forEach(tag => {
+      const span = document.createElement('span');
+      span.textContent = tag;
+      tagsWrap.appendChild(span);
     });
-  </script>
+
+    info.appendChild(title);
+    info.appendChild(desc);
+    info.appendChild(tagsWrap);
+
+    card.appendChild(thumb);
+    card.appendChild(info);
+    grid.appendChild(card);
+  });
+</script>
 </body>
 </html>
