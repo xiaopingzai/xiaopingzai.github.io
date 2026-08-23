@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>林砚 · 个人主页</title>
-  <!-- 使用优雅的衬线与非衬线字体组合 -->
+  <title>xiaopingzai · 项目集</title>
+  <!-- 字体选择：Inter 用于正文，Playfair Display 用于标题 -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet" />
   <style>
-    /* 全局重置与基础 */
+    /* ---------- 全局重置 ---------- */
     * {
       margin: 0;
       padding: 0;
@@ -17,272 +17,280 @@
     }
 
     body {
-      background-color: #f5f2ed;
-      color: #1e1c1a;
+      background: #121210;
+      color: #e5e2db;
       font-family: 'Inter', sans-serif;
-      line-height: 1.6;
+      line-height: 1.5;
       padding: 2rem 1.5rem;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
     }
 
-    /* 主容器 – 模拟纸张质感 */
+    /* ---------- 主容器 ---------- */
     .container {
-      max-width: 1000px;
+      max-width: 1300px;
       width: 100%;
-      background: rgba(255, 252, 248, 0.7);
-      backdrop-filter: blur(4px);
-      padding: 3rem 2.5rem;
-      border-radius: 32px;
-      box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.25),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      transition: box-shadow 0.3s ease;
     }
 
-    /* 装饰性顶线 */
-    .top-line {
-      width: 80px;
-      height: 4px;
-      background: linear-gradient(90deg, #b7a28c, #dacfc4);
-      border-radius: 4px;
-      margin-bottom: 2rem;
-    }
-
-    /* 头部区域 – 姓名 + 副标题 */
+    /* ---------- 头部 ---------- */
     .header {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: flex-end;
-      margin-bottom: 2.5rem;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-      padding-bottom: 1.5rem;
+      margin-bottom: 3.5rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-    .name-title h1 {
+    .header-left h1 {
       font-family: 'Playfair Display', serif;
       font-weight: 500;
-      font-size: 3.2rem;
+      font-size: 3.4rem;
       letter-spacing: -0.02em;
-      color: #1e1c1a;
-      margin-bottom: 0.25rem;
+      color: #f0ede8;
       line-height: 1.1;
     }
-
-    .name-title .sub {
+    .header-left .subhead {
       font-size: 1rem;
       font-weight: 400;
-      color: #7a6e64;
+      color: #a0988a;
       letter-spacing: 0.4px;
+      margin-top: 0.25rem;
       text-transform: uppercase;
-      font-feature-settings: "ss01" on;
     }
 
-    .header-extra {
+    .header-right {
       text-align: right;
       font-size: 0.95rem;
-      color: #7a6e64;
-      border-left: 2px solid #dacfc4;
-      padding-left: 1.2rem;
-    }
-    .header-extra span {
-      display: block;
-    }
-    .header-extra .highlight {
-      color: #1e1c1a;
-      font-weight: 500;
-    }
-
-    /* 介绍段落 – 有呼吸感 */
-    .intro {
-      font-size: 1.15rem;
-      max-width: 80%;
-      margin-bottom: 2.8rem;
-      color: #2e2a26;
-      border-left: 4px solid #dacfc4;
+      color: #a0988a;
+      border-left: 2px solid #3a3530;
       padding-left: 1.5rem;
     }
-    .intro em {
-      font-style: italic;
+    .header-right .count {
+      font-weight: 500;
+      color: #e5e2db;
+    }
+
+    /* ---------- 项目网格 ---------- */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2.2rem;
+      margin: 2rem 0 3rem;
+    }
+
+    /* ---------- 项目卡片 ---------- */
+    .project-card {
+      background: #1e1c18;
+      border-radius: 24px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.4s ease;
+      box-shadow: 0 8px 30px -10px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      cursor: default;
+    }
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.8);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .project-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      background: #2a2621;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      color: #6b6258;
+      position: relative;
+      overflow: hidden;
+    }
+    /* 模拟缩略图渐变装饰 */
+    .project-thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.02), transparent 60%);
+      pointer-events: none;
+    }
+
+    .project-info {
+      padding: 1.6rem 1.8rem 2rem;
+    }
+    .project-info h3 {
       font-family: 'Playfair Display', serif;
       font-weight: 500;
-      color: #8f7a66;
+      font-size: 1.5rem;
+      color: #f0ede8;
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.01em;
     }
-
-    /* 网格 – 展示技能 / 兴趣 */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.8rem;
-      margin: 2.5rem 0 3rem;
+    .project-info .desc {
+      font-size: 0.95rem;
+      color: #b5aca0;
+      margin-bottom: 1rem;
+      line-height: 1.5;
     }
-
-    .grid-item {
-      background: rgba(255, 252, 248, 0.5);
-      padding: 1.5rem 1.2rem;
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .grid-item:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 28px -12px rgba(0, 0, 0, 0.12);
-    }
-    .grid-item h3 {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      color: #8f7a66;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-    }
-    .grid-item p {
-      font-size: 1rem;
-      color: #1e1c1a;
-      font-weight: 450;
-    }
-    .grid-item .tag {
-      display: inline-block;
-      background: #e8e0d8;
-      padding: 0.2rem 0.8rem;
-      border-radius: 100px;
-      font-size: 0.8rem;
-      color: #3d3630;
-      margin-top: 0.4rem;
-    }
-
-    /* 按钮 – 跳转到 /mcnbtbjq/index.html */
-    .action-area {
+    .project-tags {
       display: flex;
-      justify-content: flex-end;
-      margin-top: 1.5rem;
-      border-top: 1px solid rgba(0, 0, 0, 0.06);
-      padding-top: 2rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .project-tags span {
+      background: #2e2a25;
+      padding: 0.2rem 0.9rem;
+      border-radius: 100px;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #bfb6a8;
+      border: 1px solid rgba(255,255,255,0.04);
     }
 
-    .btn-jump {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      background: #1e1c1a;
-      color: #f5f2ed;
-      padding: 0.8rem 2.2rem;
-      border-radius: 60px;
-      text-decoration: none;
-      font-weight: 450;
-      font-size: 1rem;
-      letter-spacing: 0.3px;
-      border: 1px solid #1e1c1a;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    }
-    .btn-jump:hover {
-      background: transparent;
-      color: #1e1c1a;
-      box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.2);
-      transform: scale(1.02);
-    }
-    .btn-jump::after {
-      content: "→";
-      font-size: 1.2rem;
-      transition: transform 0.25s ease;
-    }
-    .btn-jump:hover::after {
-      transform: translateX(5px);
-    }
-
-    /* 底部小签名 */
-    .footer-note {
+    /* ---------- 底部 ---------- */
+    .footer {
       margin-top: 2.5rem;
-      font-size: 0.85rem;
-      color: #b3a69a;
-      text-align: center;
-      letter-spacing: 0.4px;
-      border-top: 1px solid rgba(0, 0, 0, 0.04);
       padding-top: 1.8rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      text-align: center;
+      font-size: 0.8rem;
+      color: #6b6258;
+      letter-spacing: 0.3px;
+    }
+    .footer a {
+      color: #bfb6a8;
+      text-decoration: none;
+      border-bottom: 1px dotted #3a3530;
+    }
+    .footer a:hover {
+      color: #f0ede8;
+      border-bottom-color: #bfb6a8;
     }
 
-    /* 响应式微调 */
+    /* ---------- 响应式 ---------- */
     @media (max-width: 700px) {
-      body { padding: 1rem; }
-      .container { padding: 2rem 1.2rem; }
+      body { padding: 1.2rem; }
       .header { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
-      .header-extra { text-align: left; border-left: none; padding-left: 0; border-top: 1px solid #dacfc4; padding-top: 0.8rem; width: 100%; }
-      .intro { max-width: 100%; font-size: 1rem; }
-      .name-title h1 { font-size: 2.6rem; }
-      .grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
-      .action-area { justify-content: center; }
+      .header-right { text-align: left; border-left: none; padding-left: 0; border-top: 1px solid #3a3530; padding-top: 0.8rem; width: 100%; }
+      .header-left h1 { font-size: 2.6rem; }
+      .project-grid { grid-template-columns: 1fr; gap: 1.8rem; }
     }
-    @media (max-width: 450px) {
-      .grid { grid-template-columns: 1fr; }
-      .btn-jump { width: 100%; justify-content: center; }
+    @media (max-width: 480px) {
+      .project-info { padding: 1.2rem; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- 装饰线 -->
-    <div class="top-line"></div>
-
     <!-- 头部 -->
     <header class="header">
-      <div class="name-title">
-        <h1>林砚</h1>
-        <div class="sub">独立设计师 · 叙事交互</div>
+      <div class="header-left">
+        <h1>xiaopingzai</h1>
+        <div class="subhead">独立创作 · 交互与视觉</div>
       </div>
-      <div class="header-extra">
-        <span>现居 <span class="highlight">杭州</span></span>
-        <span>作品见于 <span class="highlight">D&AD</span> · <span class="highlight">Awwwards</span></span>
+      <div class="header-right">
+        <span class="count">6</span> 个项目
+        <span style="display:block; font-size:0.8rem; opacity:0.6;">2025 作品集</span>
       </div>
     </header>
 
-    <!-- 介绍 – 有温度的文字 -->
-    <div class="intro">
-      <p>
-        在逻辑与感知之间寻找平衡。<br />
-        我相信每一个界面都是一次 <em>短暂的对话</em> —— 
-        清晰、诚实，且留有余地。
-      </p>
-    </div>
-
-    <!-- 技能 / 兴趣卡片 -->
-    <div class="grid">
-      <div class="grid-item">
-        <h3>⏳ 关注</h3>
-        <p>字体排印 · 质感营造</p>
-        <span class="tag">可变字体</span>
-        <span class="tag">微动效</span>
-      </div>
-      <div class="grid-item">
-        <h3>🛠 工具</h3>
-        <p>Figma · Webflow · 原生三件套</p>
-        <span class="tag">GSAP</span>
-        <span class="tag">Blender</span>
-      </div>
-      <div class="grid-item">
-        <h3>📖 近况</h3>
-        <p>重读《设计中的设计》</p>
-        <span class="tag">散步</span>
-        <span class="tag">黑胶</span>
-      </div>
-    </div>
-
-    <!-- 跳转按钮 – 指向 /mcnbtbjq/index.html -->
-    <div class="action-area">
-      <a href="/mcnbtbjq/index.html" class="btn-jump">
-        进入另一个页面
-      </a>
-    </div>
+    <!-- 项目网格（由 JavaScript 动态生成） -->
+    <div class="project-grid" id="projectGrid"></div>
 
     <!-- 底部 -->
-    <div class="footer-note">
-      ← 点击按钮跳转到当前站点下的 /mcnbtbjq/index.html
+    <div class="footer">
+      <span>设计 · 代码 · 2025</span>
     </div>
   </div>
+
+  <script>
+    // ---------- 项目数据 ----------
+    const projects = [
+      {
+        name: '《隐秩序》',
+        desc: '基于声景的生成式视觉装置，使用 p5.js 与实时音频分析。',
+        tags: ['Creative Coding', 'p5.js', 'Sound'],
+        emoji: '〰️'
+      },
+      {
+        name: '「慢递」概念网站',
+        desc: '为虚拟邮局设计的叙事型页面，强调时间感知与留白。',
+        tags: ['Web Design', 'GSAP', 'Typography'],
+        emoji: '✉️'
+      },
+      {
+        name: '机器人草稿本',
+        desc: '开源绘图工具，允许用户用自然语言指令生成几何图形。',
+        tags: ['Tool', 'React', 'OpenAI'],
+        emoji: '🤖'
+      },
+      {
+        name: '城市切片',
+        desc: '以数据驱动的信息雕塑，将城市交通流映射为三维形态。',
+        tags: ['Data Art', 'Three.js', 'Blender'],
+        emoji: '🏙️'
+      },
+      {
+        name: '字重游戏',
+        desc: '通过可变字体探索情感表达，用户拖动滑块改变字体粗细与语气。',
+        tags: ['Variable Fonts', 'Interactive', 'CSS'],
+        emoji: '🔠'
+      },
+      {
+        name: '夜航船',
+        desc: '个人实验性播客的视觉身份，包含动态封面与定制播放器。',
+        tags: ['Branding', 'Motion', 'Web Audio'],
+        emoji: '⛵'
+      }
+    ];
+
+    // ---------- 渲染网格 ----------
+    const grid = document.getElementById('projectGrid');
+
+    projects.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'project-card';
+
+      // 缩略图（用 emoji 和简单背景模拟）
+      const thumb = document.createElement('div');
+      thumb.className = 'project-thumb';
+      // 用随机温和的底色，提升视觉丰富度
+      const hue = Math.floor(Math.random() * 30 + 30); // 暖色范围
+      thumb.style.background = `hsl(${hue}, 15%, 18%)`;
+      thumb.textContent = p.emoji;
+
+      // 信息区
+      const info = document.createElement('div');
+      info.className = 'project-info';
+
+      const title = document.createElement('h3');
+      title.textContent = p.name;
+
+      const desc = document.createElement('div');
+      desc.className = 'desc';
+      desc.textContent = p.desc;
+
+      const tagsWrap = document.createElement('div');
+      tagsWrap.className = 'project-tags';
+      p.tags.forEach(tag => {
+        const span = document.createElement('span');
+        span.textContent = tag;
+        tagsWrap.appendChild(span);
+      });
+
+      info.appendChild(title);
+      info.appendChild(desc);
+      info.appendChild(tagsWrap);
+
+      card.appendChild(thumb);
+      card.appendChild(info);
+      grid.appendChild(card);
+    });
+  </script>
 </body>
 </html>
